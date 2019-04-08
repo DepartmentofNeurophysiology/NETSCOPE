@@ -18,7 +18,7 @@ function compute_MI_batch(gem,file,varargin)
 % Optionally, the following Name-Value argument pairs:
 % px:   (optional) distributions matrix from GEM_distributions(). Will be
 %       computed if not provided.
-% ex:   (optional) required if Px is provided.
+% ex:   (optional) required if px is provided.
 % h:    (optional) entropy array from get_entropy(). Will be computed if not
 %       provided.
 % norm: (optional, default=false) whether the GEM should be normalized 
