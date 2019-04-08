@@ -1,4 +1,5 @@
 function [mi,ix,jx] = process_batch(data,ix,jx)
+%% This function is called by compute_MI_PP and compute_MI_batch
 
 if isstruct(data)
     gem = data.gem;

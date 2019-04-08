@@ -1,7 +1,9 @@
-function sgem = shuffle_gem(gem)
+function sgem = shuffle_GEM(gem)
 %% Column-wise shuffle the gene expression matrix (GEM)
 % Shuffle each column of the GEM to remove any correlations between genes
-% but preserve the transcriptional profile of the cells
+% but preserve the transcriptional profile of the cells.
+% 
+% sgem = shuffle_GEM(gem)
 % 
 % Input:
 % gem: gene expression matrix

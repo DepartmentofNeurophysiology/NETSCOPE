@@ -1,22 +1,23 @@
-function [d,p] = shortestpath(L,source,varargin)
+function [d,p] = shortestpath(L,source,target)
 %% Calculate the shortest path in a graph using Dijkstra's algorithm.
 % This function calculates the shortest path from a node i to node j (or
 % all other nodes) in the network. The length of a path is defined by the
 % sum of the inverse projection of the nodes along the path. The shortest
 % path (i,j) is the path from i to j for which this path length is minimal.
 % 
-% [dist,path] = shortestpath(map,source,[target])
+% [d,p] = shortestpath(L,source,target)
 % 
 % Input:
-% L: length matrix (elementwise inverse of projections matrix)
-% source: source node
-% target: target node (optional, default: all other nodes)
+% L:        length matrix (e.g. dot inverse of network matrix)
+% source:   source node
+% target:   (optional) target node. When not specified, the shortest path
+%           from source node to all other nodes will be computed.
 % 
 % Output:
-% d: path length of the shortest path (number or vector in the case of
-% multiple targets).
-% p: the shortest path itself. Cell or cell array containing a list of
-% nodes that constitute the path.
+% d:        path length of the shortest path (number or vector in the case
+%           of multiple targets).
+% p:        the shortest path itself. Cell or cell array containing a list
+%           of nodes that constitute the path.
 
 b = 0;
 n = size(L,1);
@@ -32,7 +33,7 @@ q = true(1,n); % unvisited nodes
 nodes = 1:n; % list of all nodes
 
 if nargin == 2 % Look for all nodes instead of 1 target node
-    varargin{1} = -1;
+    target = -1;
 end
 
 while sum(q)>0
@@ -43,7 +44,7 @@ while sum(q)>0
     q(u) = false; % node is visited
     
     % If target node is reached, quit
-    if u == varargin{1}
+    if u == target
         d = d(u);
         p = [];
         while u~=-1

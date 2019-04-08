@@ -8,6 +8,8 @@ function mi = compute_MI(gem,varargin)
 % the RAM and where no parallel processing is needed to speed up the
 % process.
 % 
+% mi = compute_MI(gem,...)
+% 
 % Input:
 % gem:  (required) gene expression matrix
 % Optionally, the following Name-Value argument pairs:

@@ -1,6 +1,7 @@
 function h = get_entropy(px)
 %% Compute entropy from gene transcription distributions
-% ...
+% 
+% h = get_entropy(px)
 % 
 % Input:
 % px: distributions matrix from GEM_distribution()

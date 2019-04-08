@@ -4,14 +4,14 @@ function [d,A] = kshortestpaths(L,K,source,target)
 % [d,A] = kshortestpaths(L,K,source,target)
 % 
 % Input:
-% L: length matrix (inverse of adjacency matrix, uni- or bilateral)
-% K: number of shortest paths to find
-% source: source node
-% target: target node
+% L:        length matrix (e.g. dot inverse of network matrix)
+% K:        number of shortest paths to find
+% source:   source node
+% target:   target node (contrary to shortestpath(), single node only)
 % 
 % Output:
-% d: array with path lengths
-% A: cell array with K shortest paths
+% d:        T by K array with path lengths
+% A:        T by K cell array with paths
 
 n = size(L,1);
 if n ~= size(L,2) % Bilateral map

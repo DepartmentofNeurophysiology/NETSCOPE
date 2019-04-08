@@ -10,6 +10,8 @@ function compute_MI_batch(gem,file,varargin)
 % parallel processing can be used (Parallel Processing Toolbox is
 % required).
 % 
+% compute_MI_batch(gem,file,...)
+% 
 % Input:
 % gem:  (required) gene expression matrix
 % file: (required) output filename to save MI matrix to.

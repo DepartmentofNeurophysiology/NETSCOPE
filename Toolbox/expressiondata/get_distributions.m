@@ -4,12 +4,14 @@ function [px,ex] = get_distributions(gem)
 % gene expression matrix (GEM), by binning and counting the levels. The
 % same bins are used for all genes.
 % 
+% [px,ex] = get_distributions(gem)
+% 
 % Input:
-% gem: gene expression matrix
+% gem:  gene expression matrix
 % 
 % Output:
-% px: matrix where rows store the transcription distributions per gene
-% ex: bin centers (domain of the distributions) ASDKLFJSDKFLJ
+% px:   matrix where rows store the transcription distributions per gene
+% ex:   bin centers (domain of the distributions) ASDKLFJSDKFLJ
 
 ngenes = size(gem,1);
 nbins = ceil(1+log2(size(gem,2)));
