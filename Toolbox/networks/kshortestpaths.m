@@ -71,4 +71,4 @@ for k = 1:K-1
     Bc(ksp) = [];
 end
 A = A'; % From KxT to TxK matrix size
-d = getpathlength(L,A);
+d = get_pathlength(L,A);
