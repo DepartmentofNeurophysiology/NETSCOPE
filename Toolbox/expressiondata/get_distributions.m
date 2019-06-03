@@ -1,8 +1,9 @@
 function [px,ex] = get_distributions(gem,varargin)
 %% Compute probability distributions of gene expression data
 % Compute the distributions of the transcription levels of the genes in the
-% gene expression matrix (GEM), by binning and counting the levels. The
-% same bins are used for all genes.
+% gene expression matrix (GEM), by binning and counting the levels. Number
+% of bins is determined by Sturges' rule. Bins can be created for each gene
+% separately, or one set of bins for the entire dataset.
 % 
 % [px,ex] = get_distributions(gem)
 % 
@@ -10,7 +11,7 @@ function [px,ex] = get_distributions(gem,varargin)
 % gem:      gene expression matrix
 % Optionally, the following Name-Value argument pairs:
 % method:   (optional) binning method - either 'uniform' (default) or
-%           'sample'.
+%           'separate'.
 % log:      whether to log-transform the data before binning, default is
 %           false.
 % 
@@ -38,7 +39,7 @@ nbins = ceil(1+log2(size(gem,2)));
 if strcmp(method,'uniform')
     [~,ex] = histcounts(gem(:),nbins);
     ex = repmat(ex,ngenes,1);
-elseif strcmp(method,'sample')
+elseif strcmp(method,'separate')
     ex = zeros(ngenes,nbins+1);
 end
 px = zeros(ngenes,length(ex)-1);
