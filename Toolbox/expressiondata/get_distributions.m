@@ -10,8 +10,8 @@ function [px,ex] = get_distributions(gem,varargin)
 % Input:
 % gem:      gene expression matrix
 % Optionally, the following Name-Value argument pairs:
-% method:   (optional) binning method - either 'uniform' (default) or
-%           'separate'.
+% method:   (optional) binning method - either 'uniform' or
+%           'separate' (default).
 % log:      whether to log-transform the data before binning, default is
 %           false.
 % 
@@ -24,7 +24,7 @@ for i = 1:2:length(varargin)
     options.(varargin{i}) = varargin{i+1};
 end
 if ~isfield(options,'method')
-    options.method = 'uniform';
+    options.method = 'separate';
 end
 if isfield(options,'log')
     if options.log
@@ -36,13 +36,13 @@ end
 
 ngenes = size(gem,1);
 nbins = ceil(1+log2(size(gem,2)));
-if strcmp(method,'uniform')
+if strcmp(options.method,'uniform')
     [~,ex] = histcounts(gem(:),nbins);
     ex = repmat(ex,ngenes,1);
-elseif strcmp(method,'separate')
+elseif strcmp(options.method,'separate')
     ex = zeros(ngenes,nbins+1);
 end
-px = zeros(ngenes,length(ex)-1);
+px = zeros(ngenes,length(ex(1,:))-1);
 for i = 1:ngenes
     if sum(gem(i,:)) == 0
         continue;

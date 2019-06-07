@@ -13,19 +13,19 @@ function mi = compute_MI(gem,varargin)
 % Input:
 % gem:  (required) gene expression matrix
 % Optionally, the following Name-Value argument pairs:
-% px:   (optional) distributions matrix from GEM_distributions(). Will be
+% px:   (optional) distributions matrix from get_distributions(). Will be
 %       computed if not provided.
-% ex:   (optional) required if Px is provided.
+% ex:   (optional) required if px is provided.
 % h:    (optional) entropy array from get_entropy(). Will be computed if not
 %       provided.
 % norm: (optional) true/false whether the GEM should be normalized before
-%       computing the distributions. Default: false.
+%       computing the distributions. Default: true.
 % 
 % Output:
 % mi:   MI matrix
 % 
 % Examples:
-% mi = compute_MI_small(gem, 'norm',true)
+% mi = compute_MI(gem, 'norm', false)
 
 %% Parse arguments, compute px, h if necessary
 options = struct();
@@ -36,6 +36,8 @@ if isfield(options,'norm')
     if options.norm
         gem = normalize_GEM(gem);
     end
+else
+    gem = normalize_GEM(gem);
 end
 if isfield(options,'px')
     px = options.px;
