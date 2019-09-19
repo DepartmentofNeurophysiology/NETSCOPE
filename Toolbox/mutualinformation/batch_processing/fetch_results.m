@@ -39,4 +39,4 @@ end
 % Clean up
 delete([tempfile '.mat']);
 clearvars -global jobs outfile tempfile;
-delete(ppool);
+%delete(ppool);

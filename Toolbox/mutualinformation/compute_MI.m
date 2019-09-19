@@ -63,8 +63,8 @@ for i = 1:ngenes
             continue;
         end
         % Compute joint distribution and MI
-        pxy = histcounts2(gem(i,:),gem(j,:),ex(i,:),ex(j,:));
-        pxy = pxy / sum(pxy(:));
+        pxy = hist3([gem(i,:)',gem(j,:)'],'Edges',{ex(i,:),ex(j,:)});
+        pxy = pxy(1:end-1,1:end-1) / sum(pxy(:));
         mi(i,j) = sum(nansum(pxy .* log(pxy ./ (px(i,:)'*px(j,:)))));
     end
 end
