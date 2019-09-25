@@ -19,7 +19,7 @@ function mi = compute_MI(gem,varargin)
 % h:    (optional) entropy array from get_entropy(). Will be computed if not
 %       provided.
 % norm: (optional) true/false whether the GEM should be normalized before
-%       computing the distributions. Default: true.
+%       computing the distributions. Default: false.
 % 
 % Output:
 % mi:   MI matrix

@@ -27,8 +27,8 @@ for i = 1:length(ix)
             continue;
         end
         % Compute joint distribution and MI
-        pxy = histcounts2(gem(ix(i),:),gem(jx(j),:),ex(ix(i),:),ex(jx(j),:));
-        pxy = pxy / sum(pxy(:));
+        pxy = hist3([gem(ix(i),:)' gem(jx(j),:)'],'Edges',{ex(ix(i),:),ex(jx(j),:)});
+        pxy = pxy(1:end-1,1:end-1) / sum(pxy(:));
         mi(i,j) = sum(nansum(pxy .* log(pxy ./ (px(ix(i),:)'*px(jx(j),:)))));
     end
 end
