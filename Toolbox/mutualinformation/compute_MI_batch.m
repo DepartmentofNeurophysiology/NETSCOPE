@@ -43,7 +43,6 @@ for i = 1:2:length(varargin)
 end
 if isfield(options,'norm')
     if options.norm
-        disp('ddd');
         gem = normalize_GEM(gem);
     end
 end
@@ -67,11 +66,13 @@ end
 
 % Use separate function for parallel procesing
 if isfield(options,'pp')
-    if ~isfield(options,'fetch')
-        options.fetch = true;
+    if options.pp
+        if ~isfield(options,'fetch')
+            options.fetch = true;
+        end
+        compute_MI_PP(gem,file,px,ex,h,options.batch,options.fetch,options.cont);
+        return;
     end
-    compute_MI_PP(gem,file,px,ex,h,options.batch,options.fetch,options.cont);
-    return;
 end
 
 %% Set up batch structure
@@ -82,7 +83,6 @@ outfile = matfile(file,'Writable',true);
 if ~options.cont
     fprintf('Allocating memory for matrix\n');
     outfile.mi = zeros(ngenes);
-    %outfile.h = h;
 end
 data = struct('gem',gem,'px',px,'ex',ex);
 
@@ -103,19 +103,17 @@ for i = 1:length(lp)
 
         if i==j
             mi = process_batch(data,ix,0);
-            %mi = mi ./ repmat(h(ix),1,length(ix));
-            %mi(isnan(mi)) = 0;
+            mi = mi ./ repmat(h(ix),1,length(ix));
+            mi(isnan(mi)) = 0;
             outfile.mi(ix,ix) = (mi+mi')/2;
         else
             mi = process_batch(data,ix,jx);
-            %mi1 = mi ./ repmat(h(ix),1,length(jx));
-            %mi1(isnan(mi1)) = 0;
-            %mi2 = mi' ./ repmat(h(jx),1,length(ix));
-            %mi2(isnan(mi2)) = 0;
-            %outfile.mi(ix,jx) = (mi1+mi2')/2;
-            %outfile.mi(jx,ix) = (mi1'+mi2)/2;
-            outfile.mi(ix,jx) = mi;
-            outfile.mi(jx,ix) = mi';
+            mi1 = mi ./ repmat(h(ix),1,length(jx));
+            mi1(isnan(mi1)) = 0;
+            mi2 = mi' ./ repmat(h(jx),1,length(ix));
+            mi2(isnan(mi2)) = 0;
+            outfile.mi(ix,jx) = (mi1+mi2')/2;
+            outfile.mi(jx,ix) = (mi1'+mi2)/2;
         end
         fprintf('%s: Saved batch %d out of %d\n',datestr(datetime('now')),k,nbatches);
     end

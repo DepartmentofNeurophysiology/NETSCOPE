@@ -36,8 +36,6 @@ if isfield(options,'norm')
     if options.norm
         gem = normalize_GEM(gem);
     end
-else
-    gem = normalize_GEM(gem);
 end
 if isfield(options,'px')
     px = options.px;
@@ -63,8 +61,8 @@ for i = 1:ngenes
             continue;
         end
         % Compute joint distribution and MI
-        pxy = hist3([gem(i,:)',gem(j,:)'],'Edges',{ex(i,:),ex(j,:)});
-        pxy = pxy(1:end-1,1:end-1) / sum(pxy(:));
+        pxy = histcounts2(gem(i,:),gem(j,:),ex(i,:),ex(j,:));
+        pxy = pxy / sum(pxy(:));
         mi(i,j) = sum(nansum(pxy .* log(pxy ./ (px(i,:)'*px(j,:)))));
     end
 end
