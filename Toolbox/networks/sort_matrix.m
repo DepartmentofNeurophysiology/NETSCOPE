@@ -19,7 +19,7 @@ n = size(mat,1);
 conn = find(sum(mat,1) ~= 0);
 nconn = length(conn);
 if nargin == 1
-    ncomps = n-1;
+    ncomps = nconn-1;
 end
 max_comp = nan(n,ncomps);
 [~,scores] = pca(mat(conn,conn));
