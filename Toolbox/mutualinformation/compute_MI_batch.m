@@ -19,8 +19,6 @@ function compute_MI_batch(gem,file,varargin)
 % ex:   (optional) required if px is provided.
 % h:    (optional) entropy array from get_entropy(). Will be computed if not
 %       provided.
-% norm: (optional, default=false) whether the GEM should be normalized 
-%       before computing the distributions.
 % batch:(optional, default=1000) batch size
 % pp:   (optional, default=false) whether to use parallel processing for
 %       faster computation.
@@ -31,18 +29,13 @@ function compute_MI_batch(gem,file,varargin)
 %       unfinished run.
 % 
 % Examples:
-% mi = compute_MI_batch(gem, 'result.mat', 'norm',true)
+% mi = compute_MI_batch(gem, 'result.mat', 'batch',2000)
 % mi = compute_MI_batch(gem, 'result.mat', 'pp',true, 'fetch',false)
 
 %% Parse arguments, compute PX, H if necessary
 options = struct();
 for i = 1:2:length(varargin)
     options.(varargin{i}) = varargin{i+1};
-end
-if isfield(options,'norm')
-    if options.norm
-        gem = normalize_GEM(gem);
-    end
 end
 if isfield(options,'px')
     px = options.px;

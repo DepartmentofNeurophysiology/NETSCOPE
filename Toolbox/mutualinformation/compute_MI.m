@@ -16,24 +16,18 @@ function [mi,h] = compute_MI(gem,varargin)
 % ex:   (optional) required if px is provided.
 % h:    (optional) entropy array from get_entropy(). Will be computed if not
 %       provided.
-% norm: (optional) true/false whether the GEM should be normalized before
-%       computing the distributions. Default: false.
 % 
 % Output:
 % mi:   MI matrix
 % 
 % Examples:
-% mi = compute_MI(gem, 'norm', false)
+% mi = compute_MI(gem)
+% mi = compute_MI(gem, 'px', pxdata, 'ex', exdata)
 
 %% Parse arguments, compute px, h if necessary
 options = struct();
 for i = 1:2:length(varargin)
     options.(varargin{i}) = varargin{i+1};
-end
-if isfield(options,'norm')
-    if options.norm
-        gem = normalize_GEM(gem);
-    end
 end
 if isfield(options,'px')
     px = options.px;

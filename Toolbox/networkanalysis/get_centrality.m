@@ -4,7 +4,7 @@ function ct = get_centrality(mat,paths)
 % determine how important the role of a node is in the global network
 % structure.
 % 
-% cent = get_centrality(mat,paths)
+% ct = get_centrality(mat,paths)
 % 
 % Input:
 % mat:      network matrix
@@ -12,7 +12,7 @@ function ct = get_centrality(mat,paths)
 %           missing
 % 
 % Output:
-% cent:     array of centrality values for each node
+% ct:       array of centrality values for each node
 
 n = size(mat,1);
 if nargin==1
