@@ -4,7 +4,7 @@ function h = get_entropy(px)
 % h = get_entropy(px)
 % 
 % Input:
-% px: distributions matrix from GEM_distribution()
+% px: distributions matrix from get_distributions()
 % 
 % Output:
 % h: array with the entropy of each gene

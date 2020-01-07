@@ -1,4 +1,4 @@
-function cent = get_centrality(mat,paths)
+function ct = get_centrality(mat,paths)
 %% Get network betweenness centrality
 % For every node calculate the 'betweenness centrality', a measure to
 % determine how important the role of a node is in the global network
@@ -21,12 +21,12 @@ if nargin==1
         [~,paths(i,:)] = shortestpath(1./mat,i);
     end
 end
-cent = zeros(1,n);
+ct = zeros(1,n);
 
 for i = 1:n
     for j = 1:n
         paths{i,j} = paths{i,j}(2:end-1);
-        cent(paths{i,j}) = cent(paths{i,j}) + 1;
+        ct(paths{i,j}) = ct(paths{i,j}) + 1;
     end
 end
-cent = cent / (n^2 - n); % Normalize
+ct = ct / (n^2 - n); % Normalize

@@ -15,6 +15,7 @@ function [order,max_comp] = sort_matrix(mat,ncomps)
 %           matrix.
 % max_comp: N by ncomps matrix with the maximum component of each node
 
+mat = double(mat);
 n = size(mat,1);
 conn = find(sum(mat,1) ~= 0);
 nconn = length(conn);

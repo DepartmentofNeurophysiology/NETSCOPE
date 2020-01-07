@@ -10,6 +10,7 @@ function lcc = get_localcc(mat)
 % lcc:  local clustering coefficients
 
 mat = mat>0;
+mat = mat - diag(diag(mat));
 n = size(mat,1);
 lcc = zeros(1,n);
 
@@ -19,4 +20,4 @@ for i = 1:n
     nbh = mat(nb,nb); % Neighborhood map
     lcc(i) = sum(sum(nbh)) / (nhs*(nhs-1));
 end
-lcc(isnan(lcc)) = 0;
+%lcc(isnan(lcc)) = 0;

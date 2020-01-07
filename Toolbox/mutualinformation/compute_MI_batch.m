@@ -33,8 +33,8 @@ function compute_MI_batch(gem,file,varargin)
 %       unfinished run.
 % 
 % Examples:
-% mi = compute_MI_large(gem, 'result.mat', 'norm',true)
-% mi = compute_MI_large(gem, 'result.mat', 'pp',true, 'fetch',false)
+% mi = compute_MI_batch(gem, 'result.mat', 'norm',true)
+% mi = compute_MI_batch(gem, 'result.mat', 'pp',true, 'fetch',false)
 
 %% Parse arguments, compute PX, H if necessary
 options = struct();
