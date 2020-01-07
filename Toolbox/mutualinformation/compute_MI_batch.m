@@ -1,12 +1,10 @@
 function compute_MI_batch(gem,file,varargin)
 %% Compute mutual information (MI) matrix from gene expression data
 % This function computes a MI matrix where each entry (i,j) is the MI
-% between genes i and j. The MI is normalized w.r.t. the entropy of i, and
-% then averaged with its transpose so that the final product is a
-% symmetric matrix.
-% This function should be used for datasets that are too large to fit in
-% the RAM. This function does not load the entire MI matrix in the memory,
-% but computes it in batches and stores the result in a file. Optionally,
+% between genes i and j.
+% This function can be used for datasets that are too large to fit in the
+% RAM. This function does not load the entire MI matrix in the memory, but
+% computes it in batches and stores the result in a file. Optionally,
 % parallel processing can be used (Parallel Processing Toolbox is
 % required).
 % 
@@ -84,6 +82,7 @@ if ~options.cont
     fprintf('Allocating memory for matrix\n');
     outfile.mi = zeros(ngenes);
 end
+outfile.h = h; % Store entropy for normalization
 data = struct('gem',gem,'px',px,'ex',ex);
 
 %% Create parallel pool and parallel batch jobs (stored in f)
@@ -103,17 +102,22 @@ for i = 1:length(lp)
 
         if i==j
             mi = process_batch(data,ix,0);
-            mi = mi ./ repmat(h(ix),1,length(ix));
-            mi(isnan(mi)) = 0;
-            outfile.mi(ix,ix) = (mi+mi')/2;
+            outfile.mi(ix,ix) = mi;
+            % Old normalization
+            %mi = mi ./ repmat(h(ix),1,length(ix));
+            %mi(isnan(mi)) = 0;
+            %outfile.mi(ix,ix) = (mi+mi')/2;
         else
             mi = process_batch(data,ix,jx);
-            mi1 = mi ./ repmat(h(ix),1,length(jx));
-            mi1(isnan(mi1)) = 0;
-            mi2 = mi' ./ repmat(h(jx),1,length(ix));
-            mi2(isnan(mi2)) = 0;
-            outfile.mi(ix,jx) = (mi1+mi2')/2;
-            outfile.mi(jx,ix) = (mi1'+mi2)/2;
+            outfile.mi(ix,jx) = mi;
+            outfile.mi(jx,ix) = mi';
+            % Old normalization
+            %mi1 = mi ./ repmat(h(ix),1,length(jx));
+            %mi1(isnan(mi1)) = 0;
+            %mi2 = mi' ./ repmat(h(jx),1,length(ix));
+            %mi2(isnan(mi2)) = 0;
+            %outfile.mi(ix,jx) = (mi1+mi2')/2;
+            %outfile.mi(jx,ix) = (mi1'+mi2)/2;
         end
         fprintf('%s: Saved batch %d out of %d\n',datestr(datetime('now')),k,nbatches);
     end

@@ -1,10 +1,8 @@
-function mi = compute_MI(gem,varargin)
+function [mi,h] = compute_MI(gem,varargin)
 %% Compute mutual information (MI) matrix from gene expression data
 % This function computes a MI matrix where each entry (i,j) is the MI
-% between genes i and j. The MI is normalized w.r.t. the entropy of i, and
-% then averaged with its transpose so that the final product is a
-% symmetric matrix.
-% This function should be used for datasets that are small enough to fit in
+% between genes i and j.
+% This function can be used for datasets that are small enough to fit in
 % the RAM and where no parallel processing is needed to speed up the
 % process.
 % 
@@ -69,6 +67,7 @@ end
 
 %% Normalize and symmetrize MI matrix
 mi = mi+mi';
-mi = mi ./ repmat(h,1,ngenes);
-mi(isnan(mi)) = 0;
-mi = (mi+mi')/2;
+% Old normalization
+%mi = mi ./ repmat(h,1,ngenes);
+%mi(isnan(mi)) = 0;
+%mi = (mi+mi')/2;

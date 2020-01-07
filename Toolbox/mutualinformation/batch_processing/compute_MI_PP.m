@@ -1,5 +1,5 @@
 function compute_MI_PP(gem,file,px,ex,h,batch,fetch,cont)
-%% This function is called from compute_MI_large()
+%% This function is called from compute_MI_batch()
 
 %% Set up batch structure
 fprintf('Start time: %s\n',datestr(datetime('now')));
@@ -8,7 +8,7 @@ ngenes = size(gem,1);
 clearvars -global jobs outfile tempfile;
 global jobs outfile tempfile;
 tempfile = tempname(); % Temporary file for provisional results
-save(tempfile,'gem','px','ex','h');
+save(tempfile,'gem','px','ex');
 
 % Open output file, allocate matrix if it doesn't exist
 outfile = matfile(file,'Writable',true);
@@ -16,6 +16,7 @@ if ~cont
     fprintf('Allocating memory for matrix\n');
     outfile.mi = zeros(ngenes);
 end
+outfile.h = h;
 
 %% Create parallel pool and parallel batch jobs
 gcp();
