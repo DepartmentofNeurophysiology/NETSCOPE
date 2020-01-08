@@ -10,12 +10,7 @@ else
 end
 clear data;
 
-if jx==0
-    jx = ix;
-    half = true;
-else
-    half = false;
-end
+half = isequal(ix,jx); % Not along diagonal
 mi = zeros([length(ix) length(jx)]);
 
 for i = 1:length(ix)

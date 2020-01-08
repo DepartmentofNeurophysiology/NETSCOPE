@@ -8,7 +8,7 @@ ngenes = size(gem,1);
 clearvars -global jobs outfile tempfile;
 global jobs outfile tempfile;
 tempfile = tempname(); % Temporary file for provisional results
-save(tempfile,'gem','px','ex');
+save(tempfile,'gem','px','ex','h');
 
 % Open output file, allocate matrix if it doesn't exist
 outfile = matfile(file,'Writable',true);
@@ -16,7 +16,6 @@ if ~cont
     fprintf('Allocating memory for matrix\n');
     outfile.mi = zeros(ngenes);
 end
-outfile.h = h;
 
 %% Create parallel pool and parallel batch jobs
 gcp();
@@ -31,12 +30,8 @@ for i = 1:length(lp)
         if cont && sum(sum(outfile.mi(ix,jx)))>0
             continue;
         end
-
-        if i==j
-            jobs = [jobs;parfeval(@process_batch,3,tempfile,ix,0)];
-        else
-            jobs = [jobs;parfeval(@process_batch,3,tempfile,ix,jx)];
-        end
+        
+        jobs = [jobs;parfeval(@process_batch,3,tempfile,ix,jx)];
     end
 end
 

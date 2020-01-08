@@ -75,7 +75,6 @@ if ~options.cont
     fprintf('Allocating memory for matrix\n');
     outfile.mi = zeros(ngenes);
 end
-outfile.h = h; % Store entropy for normalization
 data = struct('gem',gem,'px',px,'ex',ex);
 
 %% Create parallel pool and parallel batch jobs (stored in f)
@@ -93,25 +92,19 @@ for i = 1:length(lp)
             continue;
         end
 
-        if i==j
-            mi = process_batch(data,ix,0);
-            outfile.mi(ix,ix) = mi;
-            % Old normalization
-            %mi = mi ./ repmat(h(ix),1,length(ix));
-            %mi(isnan(mi)) = 0;
-            %outfile.mi(ix,ix) = (mi+mi')/2;
-        else
-            mi = process_batch(data,ix,jx);
-            outfile.mi(ix,jx) = mi;
+        mi = process_batch(data,ix,jx);
+        mi = normalize_MI(mi,h(ix),h(jx));
+        outfile.mi(ix,jx) = mi;
+        if i ~= j % Not along diagonal
             outfile.mi(jx,ix) = mi';
-            % Old normalization
-            %mi1 = mi ./ repmat(h(ix),1,length(jx));
-            %mi1(isnan(mi1)) = 0;
-            %mi2 = mi' ./ repmat(h(jx),1,length(ix));
-            %mi2(isnan(mi2)) = 0;
-            %outfile.mi(ix,jx) = (mi1+mi2')/2;
-            %outfile.mi(jx,ix) = (mi1'+mi2)/2;
         end
+        % Old normalization
+        %mi1 = mi ./ repmat(h(ix),1,length(jx));
+        %mi1(isnan(mi1)) = 0;
+        %mi2 = mi' ./ repmat(h(jx),1,length(ix));
+        %mi2(isnan(mi2)) = 0;
+        %outfile.mi(ix,jx) = (mi1+mi2')/2;
+        %outfile.mi(jx,ix) = (mi1'+mi2)/2;
         fprintf('%s: Saved batch %d out of %d\n',datestr(datetime('now')),k,nbatches);
     end
 end
