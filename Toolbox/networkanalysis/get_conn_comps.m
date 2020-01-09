@@ -1,10 +1,10 @@
-function [conn,pcount] = get_conn_comps(mat)
+function [conn,pcount] = get_conn_comps(mi)
 %% Find connected components (CCs) of network
 % 
 % [conn,pcount] = connectedcomps(mat)
 % 
 % Input:
-% mat:      network matrix
+% mi:       MI/network matrix
 % 
 % Output:
 % conn:     cell array with one cell per CC containing node indices of the
@@ -12,13 +12,13 @@ function [conn,pcount] = get_conn_comps(mat)
 % pcount:   pattern count, occurence frequency of CCs of a particular size.
 
 conn = [];
-n = size(mat,1);
+n = size(mi,1);
 v = false(1,n); % Visited
 
 for i = 1:n
     conn = [conn {[]}];
     if v(i) == false
-        [v,conn] = getnbh(i,v,conn,mat);
+        [v,conn] = getnbh(i,v,conn,mi);
     end
 end
 conn(cellfun(@isempty,conn)) = [];

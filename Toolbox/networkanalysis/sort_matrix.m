@@ -1,4 +1,4 @@
-function [order,max_comp] = sort_matrix(mat,ncomps)
+function [order,max_comp] = sort_matrix(mi,ncomps)
 %% Sort network nodes by similarity in connectivity
 % Use PCA to find similarities in the connectivity profiles of nodes, and
 % then sort them so that nodes with the same PC are next to each other.
@@ -6,7 +6,7 @@ function [order,max_comp] = sort_matrix(mat,ncomps)
 % [order,max_comp] = sort_matrix(mat,ncomps)
 % 
 % Input:
-% mat:      N by N network matrix
+% mi:       MI/network matrix (N by N)
 % ncomps:   (optional) number of components to use (to refine sorting).
 %           Default is maximum which is N-1.
 % 
@@ -15,15 +15,15 @@ function [order,max_comp] = sort_matrix(mat,ncomps)
 %           matrix.
 % max_comp: N by ncomps matrix with the maximum component of each node
 
-mat = double(mat);
-n = size(mat,1);
-conn = find(sum(mat,1) ~= 0);
+mi = double(mi);
+n = size(mi,1);
+conn = find(sum(mi,1) ~= 0);
 nconn = length(conn);
 if nargin == 1
     ncomps = nconn-1;
 end
 max_comp = nan(n,ncomps);
-[~,scores] = pca(mat(conn,conn));
+[~,scores] = pca(mi(conn,conn));
 
 for i = 1:nconn
     [~,j] = sort(scores(i,:),'descend');

@@ -1,4 +1,4 @@
-function export_network(filename,labels,mat,directed,varargin)
+function export_network(filename,labels,mi,directed,varargin)
 %% Export network data to a file in GEXF format.
 % Export a network to a GEXF (XML-like) file that can be loaded by network
 % visualization software, Gephi in particular.
@@ -8,7 +8,7 @@ function export_network(filename,labels,mat,directed,varargin)
 % Input:
 % filename: (required) name of output file.
 % labels:   (required) N by 1 cell array with node labels.
-% mat:      (required) N by N network matrix.
+% mi :      (required) MI/network matrix (N by N).
 % directed: (required) true/false whether edge directionality should be
 %           considered.
 
@@ -50,8 +50,8 @@ graph.setAttribute('mode','static'); % Network is not time dependent
 if directed
     graph.setAttribute('defaultedgetype','directed');
 else
-    mat = max(mat,mat');
-    mat = tril(mat);
+    mi = max(mi,mi');
+    mi = tril(mi);
     graph.setAttribute('defaultedgetype','undirected');
 end
 
@@ -116,14 +116,14 @@ disp('Writing edge data to document...');
 l = 0;
 for i = 1:n
     for j = 1:n
-        if mat(i,j)==0
+        if mi(i,j)==0
             continue;
         end
         edge = xmlDoc.createElement('edge');
         edge.setAttribute('id',num2str(l));
         edge.setAttribute('source',num2str(i-1));
         edge.setAttribute('target',num2str(j-1));
-        edge.setAttribute('weight',num2str(mat(i,j)));
+        edge.setAttribute('weight',num2str(mi(i,j)));
         if ~isempty(edge_att)
             avs = xmlDoc.createElement('attvalues');
             for k = 1:length(edge_att)

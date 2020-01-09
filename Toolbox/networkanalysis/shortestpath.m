@@ -1,14 +1,16 @@
-function [d,p] = shortestpath(L,source,target)
+function [d,p] = shortestpath(mi,source,target)
 %% Calculate the shortest path in a graph using Dijkstra's algorithm.
 % This function calculates the shortest path from a node i to node j (or
 % all other nodes) in the network. The length of a path is defined by the
-% sum of the inverse projection of the nodes along the path. The shortest
-% path (i,j) is the path from i to j for which this path length is minimal.
+% sum of the distances between the nodes along the path. The shortest path
+% (i,j) is the path from i to j for which this path length is minimal. The
+% distance between nodes is equal to the Variation of Information (VOI), or
+% 1-MI.
 % 
-% [d,p] = shortestpath(L,source,target)
+% [d,p] = shortestpath(mi,source,target)
 % 
 % Input:
-% L:        length matrix (e.g. dot inverse of network matrix)
+% mi:       MI/network matrix
 % source:   source node
 % target:   (optional) target node. When not specified, the shortest path
 %           from source node to all other nodes will be computed.
@@ -19,13 +21,9 @@ function [d,p] = shortestpath(L,source,target)
 % p:        the shortest path itself. Cell or cell array containing a list
 %           of nodes that constitute the path.
 
-b = 0;
-n = size(L,1);
-if n ~= size(L,2) % Bilateral map
-    L = [L;[L(:,(n+1):(2*n))' L(:,1:n)]];
-    n = size(L,1);
-    b = 1;
-end
+voi = 1-mi;
+n = size(voi,1);
+
 d = inf(1,n); % distance between source and targets
 d(source) = 0;
 prev = -ones(1,n); % previous node in shortest path, -1=undefined
@@ -57,7 +55,7 @@ while sum(q)>0
     
     % For every target: if the new path (via u) is shorter than the old
     % one, replace.
-    tdist = d(u) + L(u,:); % temporary distance
+    tdist = d(u) + voi(u,:); % temporary distance
     index = tdist<d; % This is not equal to index=L(u,:)>0, because of inf values
     d(index) = tdist(index);
     prev(index) = u;
@@ -70,9 +68,4 @@ for i = 1:n
         p{i} = [u p{i}];
         u = prev(u);
     end
-end
-
-if b == 1 % Bilateral map
-    p = p(:,1:n/2);
-    d = d(:,1:n/2);
 end

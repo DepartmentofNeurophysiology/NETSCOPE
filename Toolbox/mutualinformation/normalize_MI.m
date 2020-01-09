@@ -28,7 +28,7 @@ joint_h = repmat(hi,1,n2) + repmat(hj',n1,1) - mi_unnorm;
 
 % Normalized MI
 mi = mi_unnorm ./ joint_h;
-mi(isnan(mi)) = 0;
+mi(isnan(mi)) = -inf; % Disconnected nodes
 
 % Variation of information; a distance measure (as opposed to MI which is a
 % measure of similarity)
