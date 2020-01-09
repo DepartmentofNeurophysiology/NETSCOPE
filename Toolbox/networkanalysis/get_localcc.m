@@ -1,7 +1,7 @@
 function lcc = get_localcc(mi)
 %% Calculate local clustering coefficient for every node in network
 % 
-% lcc = get_localcc(mat)
+% lcc = get_localcc(mi)
 % 
 % Input:
 % mi:   MI/network matrix

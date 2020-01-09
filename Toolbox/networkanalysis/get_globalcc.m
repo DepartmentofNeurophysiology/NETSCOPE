@@ -1,7 +1,7 @@
 function gcc = get_globalcc(mi)
 %% Calculate global clustering coefficient
 % 
-% gcc = get_globalcc(mat)
+% gcc = get_globalcc(mi)
 % 
 % Input:
 % mi:   MI/network matrix

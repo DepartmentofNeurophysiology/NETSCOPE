@@ -1,7 +1,7 @@
 function [conn,pcount] = get_conn_comps(mi)
 %% Find connected components (CCs) of network
 % 
-% [conn,pcount] = connectedcomps(mat)
+% [conn,pcount] = connectedcomps(mi)
 % 
 % Input:
 % mi:       MI/network matrix

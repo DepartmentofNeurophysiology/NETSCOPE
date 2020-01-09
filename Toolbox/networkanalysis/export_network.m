@@ -3,12 +3,12 @@ function export_network(filename,labels,mi,directed,varargin)
 % Export a network to a GEXF (XML-like) file that can be loaded by network
 % visualization software, Gephi in particular.
 % 
-% export_network(filename,labels,mat,directed,...)
+% export_network(filename,labels,mi,directed,...)
 % 
 % Input:
 % filename: (required) name of output file.
 % labels:   (required) N by 1 cell array with node labels.
-% mi :      (required) MI/network matrix (N by N).
+% mi:       (required) MI/network matrix (N by N).
 % directed: (required) true/false whether edge directionality should be
 %           considered.
 

@@ -3,7 +3,7 @@ function [order,max_comp] = sort_matrix(mi,ncomps)
 % Use PCA to find similarities in the connectivity profiles of nodes, and
 % then sort them so that nodes with the same PC are next to each other.
 % 
-% [order,max_comp] = sort_matrix(mat,ncomps)
+% [order,max_comp] = sort_matrix(mi,ncomps)
 % 
 % Input:
 % mi:       MI/network matrix (N by N)
