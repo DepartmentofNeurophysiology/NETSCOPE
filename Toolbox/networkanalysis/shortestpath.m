@@ -4,8 +4,8 @@ function [d,p] = shortestpath(mi,source,target)
 % all other nodes) in the network. The length of a path is defined by the
 % sum of the distances between the nodes along the path. The shortest path
 % (i,j) is the path from i to j for which this path length is minimal. The
-% distance between nodes is equal to the Variation of Information (VOI), or
-% 1-MI.
+% distance between nodes is equal to the ration of Variation of Information
+% (VOI, equals 1-MI) to Mutual Information (MI).
 % 
 % [d,p] = shortestpath(mi,source,target)
 % 
@@ -21,8 +21,8 @@ function [d,p] = shortestpath(mi,source,target)
 % p:        the shortest path itself. Cell or cell array containing a list
 %           of nodes that constitute the path.
 
-voi = 1-mi;
-n = size(voi,1);
+dist = (1-mi) ./ mi;
+n = size(dist,1);
 
 d = inf(1,n); % distance between source and targets
 d(source) = 0;
@@ -30,7 +30,7 @@ prev = -ones(1,n); % previous node in shortest path, -1=undefined
 q = true(1,n); % unvisited nodes
 nodes = 1:n; % list of all nodes
 
-if nargin == 2 % Look for all nodes instead of 1 target node
+if nargin == 2 % Look for all nodes instead of a single target node
     target = -1;
 end
 
@@ -55,7 +55,7 @@ while sum(q)>0
     
     % For every target: if the new path (via u) is shorter than the old
     % one, replace.
-    tdist = d(u) + voi(u,:); % temporary distance
+    tdist = d(u) + dist(u,:); % temporary distance
     index = tdist<d; % This is not equal to index=L(u,:)>0, because of inf values
     d(index) = tdist(index);
     prev(index) = u;

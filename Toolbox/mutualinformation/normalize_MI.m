@@ -1,10 +1,11 @@
-function [mi, voi] = normalize_MI(mi_unnorm,hi,hj)
+function [mi, dist] = normalize_MI(mi_unnorm,hi,hj)
 %% Normalize MI and calculate distance matrix
-% Normalize MI matrix with respect to the joint entropy and calculate the
+% Normalize MI matrix with respect to the joint entropy, calculate the
 % Variation of Information (VOI) matrix, which measures information
-% distance, as opposed to MI which measures information similarity.
+% distance, as opposed to MI which measures information similarity, and
+% calculate the distance matrix which is VOI./MI.
 % 
-% [mi, voi] = normalize_MI(mi_unnormalized,hi,[hj])
+% [mi, dist] = normalize_MI(mi_unnormalized,hi,[hj])
 % 
 % Input:
 % mi_unnorm:  MI matrix
@@ -28,8 +29,9 @@ joint_h = repmat(hi,1,n2) + repmat(hj',n1,1) - mi_unnorm;
 
 % Normalized MI
 mi = mi_unnorm ./ joint_h;
-mi(isnan(mi)) = -inf; % Disconnected nodes
+mi(isnan(mi)) = 0;
 
 % Variation of information; a distance measure (as opposed to MI which is a
 % measure of similarity)
 voi = 1 - mi; % == joint_h - mi_unnormalized
+dist = voi ./ mi;

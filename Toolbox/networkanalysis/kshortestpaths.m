@@ -14,34 +14,35 @@ function [d,A] = kshortestpaths(mi,K,source,target)
 % d:        T by K array with path lengths
 % A:        T by K cell array with paths
 
-voi = 1 - mi;
+dist = (1 - mi) ./ mi;
 A = cell(K,1);
-[~,A(1,:)] = shortestpath(1-voi,source,target); % First KSP using Dijkstra
+[~,A(1,:)] = shortestpath(mi,source,target); % First KSP using Dijkstra
 
 B = []; % Potential KSPs
 Bc = []; % Cost of potential KSPs
 for k = 1:K-1
     for i = 1:length(A{k})-1
-        voi1 = voi; % Copy of original distance matrix
+        dist1 = dist; % Copy of original distance matrix
+        mi1 = dist1 ./ (1 + dist1); % Convert back to MI matrix
         spurNode = A{k}(i); % Set the spur node
         rootPath = A{k}(1:i); % Copy root path from previous KSP
-        rootCost = get_pathlength(1-voi1,rootPath); % Cost of root path
+        rootCost = get_pathlength(mi1,rootPath); % Cost of root path
 
         for j = 1:k % For all KSPs that are already found
             p = A{j};
             if length(p)>i
                 if isequal(rootPath,p(1:i))
-                    voi1(p(i),p(i+1)) = Inf; % Remove edge from graph
+                    dist1(p(i),p(i+1)) = Inf; % Remove edge from graph
                 end
             end
         end
 
-        voi1(rootPath(1:end-1),:) = Inf; % Remove root path nodes from graph
-        voi1(:,rootPath(1:end-1)) = Inf;
+        dist1(rootPath(1:end-1),:) = Inf; % Remove root path nodes from graph
+        dist1(:,rootPath(1:end-1)) = Inf;
 
-        [spurCost,spurPath] = shortestpath(1-voi1,spurNode,target);
+        [spurCost,spurPath] = shortestpath(mi1,spurNode,target);
         spurPath = spurPath{1};
-%        if spurCost ~= Inf
+%        if spurCost ~= Inf % Error check
             totalPath = [rootPath spurPath(2:end)];
             totalCost = rootCost+spurCost;
             B = [B {totalPath}];
