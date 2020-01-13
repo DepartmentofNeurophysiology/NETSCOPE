@@ -8,7 +8,7 @@ function [d,A] = kshortestpaths(mi,K,source,target)
 % mi:       MI/network matrix
 % K:        number of shortest paths to find
 % source:   source node
-% target:   target node (contrary to shortestpath(), single node only)
+% target:   target node (single node)
 % 
 % Output:
 % d:        T by K array with path lengths
@@ -69,4 +69,4 @@ for k = 1:K-1
     Bc(ksp) = [];
 end
 A = A'; % From KxT to TxK matrix size
-d = get_pathlength(1-voi,A);
+d = get_pathlength(mi,A);

@@ -4,7 +4,7 @@ function [d,p] = shortestpath(mi,source,target)
 % all other nodes) in the network. The length of a path is defined by the
 % sum of the distances between the nodes along the path. The shortest path
 % (i,j) is the path from i to j for which this path length is minimal. The
-% distance between nodes is equal to the ration of Variation of Information
+% distance between nodes is equal to the ratio of Variation of Information
 % (VOI, equals 1-MI) to Mutual Information (MI).
 % 
 % [d,p] = shortestpath(mi,source,target)
