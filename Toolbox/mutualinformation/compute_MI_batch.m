@@ -8,6 +8,8 @@ function compute_MI_batch(gem,file,varargin)
 % parallel processing can be used (Parallel Processing Toolbox is
 % required).
 % 
+% Does currently not work with Octave.
+% 
 % compute_MI_batch(gem,file,...)
 % 
 % Input:

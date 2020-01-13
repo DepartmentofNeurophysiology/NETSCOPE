@@ -25,7 +25,7 @@ n2 = length(hj);
 
 % Joint entropy
 joint_h = repmat(hi,1,n2) + repmat(hj',n1,1) - mi_unnorm;
-%joint_h = hi + hj' - mi_unnorm % Works with 2016b and later versions
+%joint_h = hi + hj' - mi_unnorm % Only works with recent MATLAB/Octave versions
 
 % Normalized MI
 mi = mi_unnorm ./ joint_h;
