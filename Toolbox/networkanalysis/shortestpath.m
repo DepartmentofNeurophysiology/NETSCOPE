@@ -20,6 +20,8 @@ function [d,p] = shortestpath(mi,source,target)
 %           of multiple targets).
 % p:        the shortest path itself. Cell or cell array containing a list
 %           of nodes that constitute the path.
+% 
+% See also GET_PATHLENGTH, KSHORTESTPATHS, GET_DOS
 
 dist = (1-mi) ./ mi;
 n = size(dist,1);

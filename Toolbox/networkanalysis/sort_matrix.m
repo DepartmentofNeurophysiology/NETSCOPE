@@ -11,7 +11,7 @@ function [order,max_comp] = sort_matrix(mi,ncomps)
 %           Default is maximum which is N-1.
 % 
 % Output:
-% order:    new order of the nodes so that mat(order,order) is the sorted
+% order:    new order of the nodes so that mi(order,order) is the sorted
 %           matrix.
 % max_comp: N by ncomps matrix with the maximum component of each node
 

@@ -11,12 +11,12 @@ function export_network(filename,labels,mi,directed,varargin)
 % mi:       (required) MI/network matrix (N by N).
 % directed: (required) true/false whether edge directionality should be
 %           considered.
-
+%
 % Optionally, Name-Value argument pairs can be added to include data
 % describing nodes or edges, like labels, in the file. This data can be
 % used by the network software to e.g. filter the network. Node data should
 % be passed as N by 1 array and edge data as N by N matrix.
-
+%
 % Limitation: node data can not be named 'id' or 'label' and edge data can
 % not be named 'id', 'source', 'target' or 'weight'.
 % 
