@@ -1,7 +1,7 @@
 function compute_MI_batch(gem,file,varargin)
 %% Compute mutual information (MI) matrix from gene expression data
-% This function computes a MI matrix where each entry (i,j) is the MI
-% between genes i and j.
+% This function computes a normalized MI matrix where each entry (i,j) is
+% the MI between genes i and j.
 % This function can be used for datasets that are too large to fit in the
 % RAM. This function does not load the entire MI matrix in the memory, but
 % computes it in batches and stores the result in a file. Optionally,

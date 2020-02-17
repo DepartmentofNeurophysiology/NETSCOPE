@@ -18,7 +18,7 @@ function mi = compute_MI(gem,varargin)
 %       provided.
 % 
 % Output:
-% mi:   MI matrix
+% mi:   MI matrix (normalized w.r.t. joint entropy)
 % 
 % Examples:
 % mi = compute_MI(gem)
