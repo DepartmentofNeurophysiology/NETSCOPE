@@ -23,6 +23,8 @@ function mi = compute_MI(gem,varargin)
 % Examples:
 % mi = compute_MI(gem)
 % mi = compute_MI(gem, 'px', pxdata, 'ex', exdata)
+% 
+% See also COMPUTE_MI_BATCH, NORMALIZE_MI
 
 %% Parse arguments, compute px, h if necessary
 options = struct();

@@ -33,6 +33,8 @@ function compute_MI_batch(gem,file,varargin)
 % Examples:
 % mi = compute_MI_batch(gem, 'result.mat', 'batch',2000)
 % mi = compute_MI_batch(gem, 'result.mat', 'pp',true, 'fetch',false)
+% 
+% See also COMPUTE_MI, NORMALIZE_MI
 
 %% Parse arguments, compute PX, H if necessary
 options = struct();

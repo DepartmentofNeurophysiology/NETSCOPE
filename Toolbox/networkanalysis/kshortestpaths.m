@@ -13,6 +13,8 @@ function [d,A] = kshortestpaths(mi,K,source,target)
 % Output:
 % d:        T by K array with path lengths
 % A:        T by K cell array with paths
+% 
+% See also SHORTESTPATH
 
 dist = (1 - mi) ./ mi;
 A = cell(K,1);

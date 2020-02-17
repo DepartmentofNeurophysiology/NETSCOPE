@@ -8,6 +8,8 @@ function h = get_entropy(px)
 % 
 % Output:
 % h: array with the entropy of each gene
+% 
+% See also GET_DISTRIBUTIONS
 
 ngenes = size(px,1);
 h = zeros(ngenes,1);

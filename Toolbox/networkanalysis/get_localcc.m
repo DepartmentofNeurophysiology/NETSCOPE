@@ -8,6 +8,8 @@ function lcc = get_localcc(mi)
 % 
 % Output:
 % lcc:  local clustering coefficients
+% 
+% See also GET_GLOBALCC, GET_CENTRALITY
 
 mi = mi>0;
 mi = mi - diag(diag(mi));

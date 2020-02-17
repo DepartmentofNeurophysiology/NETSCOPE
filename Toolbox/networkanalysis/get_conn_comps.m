@@ -10,6 +10,8 @@ function [conn,pcount] = get_conn_comps(mi)
 % conn:     cell array with one cell per CC containing node indices of the
 %           nodes that make up the CC.
 % pcount:   pattern count, occurence frequency of CCs of a particular size.
+% 
+% See also GET_DOS_MATRIX
 
 conn = [];
 n = size(mi,1);

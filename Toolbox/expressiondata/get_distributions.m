@@ -16,6 +16,8 @@ function [px,ex] = get_distributions(gem,varargin)
 % Output:
 % px:       matrix where rows are the distributions per gene.
 % ex:       bin edges
+% 
+% See also GET_ENTROPY
 
 options = struct();
 for i = 1:2:length(varargin)

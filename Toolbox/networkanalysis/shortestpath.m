@@ -21,7 +21,7 @@ function [d,p] = shortestpath(mi,source,target)
 % p:        the shortest path itself. Cell or cell array containing a list
 %           of nodes that constitute the path.
 % 
-% See also GET_PATHLENGTH, KSHORTESTPATHS, GET_DOS
+% See also GET_PATHLENGTH, KSHORTESTPATHS, GET_DOS_MATRIX
 
 dist = (1-mi) ./ mi;
 n = size(dist,1);

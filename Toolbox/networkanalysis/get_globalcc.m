@@ -8,6 +8,8 @@ function gcc = get_globalcc(mi)
 % 
 % Output:
 % gcc:  global clustering coefficient
+% 
+% See also GET_LOCALCC
 
 mi = tril(mi);
 [s,t] = find(mi>0); % Edge indices (source-target, s>t)

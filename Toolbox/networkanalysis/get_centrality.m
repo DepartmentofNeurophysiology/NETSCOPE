@@ -13,6 +13,8 @@ function ct = get_centrality(mi,paths)
 % 
 % Output:
 % ct:       array of centrality values for each node
+% 
+% See also SHORTESTPATH, GET_LOCALCC
 
 n = size(mi,1);
 if nargin==1

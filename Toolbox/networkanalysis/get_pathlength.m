@@ -12,6 +12,8 @@ function d = get_pathlength(mi,p)
 % 
 % Output:
 % d: pathlength
+% 
+% See also SHORTESTPATH, KSHORTESTPATHS
 
 dist = (1 - mi) ./ mi;
 
