@@ -24,8 +24,7 @@ B = []; % Potential KSPs
 Bc = []; % Cost of potential KSPs
 for k = 1:K-1
     for i = 1:length(A{k})-1
-        dist1 = dist; % Copy of original distance matrix
-        mi1 = dist1 ./ (1 + dist1); % Convert back to MI matrix
+        mi1 = mi; % Copy of original MI matrix
         spurNode = A{k}(i); % Set the spur node
         rootPath = A{k}(1:i); % Copy root path from previous KSP
         rootCost = get_pathlength(mi1,rootPath); % Cost of root path
@@ -34,13 +33,13 @@ for k = 1:K-1
             p = A{j};
             if length(p)>i
                 if isequal(rootPath,p(1:i))
-                    dist1(p(i),p(i+1)) = Inf; % Remove edge from graph
+                    mi1(p(i),p(i+1)) = 0; % Remove edge from graph
                 end
             end
         end
 
-        dist1(rootPath(1:end-1),:) = Inf; % Remove root path nodes from graph
-        dist1(:,rootPath(1:end-1)) = Inf;
+        mi1(rootPath(1:end-1),:) = 0; % Remove root path nodes from graph
+        mi1(:,rootPath(1:end-1)) = 0;
 
         [spurCost,spurPath] = shortestpath(mi1,spurNode,target);
         spurPath = spurPath{1};
@@ -62,7 +61,8 @@ for k = 1:K-1
     end
 
     [~,ksp] = min(Bc);
-    if isempty(B)
+    if isempty(B) || B{ksp}(end) ~= target
+        fprintf('Found %d paths.\n', k+1);
         break;
     else
         A(k+1) = B(ksp);
