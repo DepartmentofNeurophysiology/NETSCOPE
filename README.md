@@ -1,12 +1,12 @@
 ## Introduction
-TITAN is a MATLAB/Octave toolbox for information theoretical analysis of molecular networks. The toolbox is plug&play; just download the right version and start processing your data. TITAN can be used for e.g. network analysis of gene expression data, using topological patterns to identify genes or pathways of interest. For more information, see: *Bergmans and Celikel, 2021*.
+TITAN is a MATLAB/Octave toolbox for information theoretical analysis of molecular networks. The toolbox is plug&play; just download the right version and start processing your data. TITAN can be used for e.g. network analysis of gene expression data, using topological patterns to identify genes or pathways of interest. For more information, see the accompanying article (Bergmans and Celikel 2021).
 
 ## Download and Setup
 **MATLAB**  
-[Download .zip](https://raw.githubusercontent.com/nearestneighbour/TITAN/master/Releases/titan_matlab.zip)
+[Download titan_matlab.zip](https://github.com/nearestneighbour/TITAN/blob/master/Releases/titan_matlab.zip?raw=true)
 
 **Octave**  
-[Download .zip](https://raw.githubusercontent.com/nearestneighbour/TITAN/master/Releases/titan_octave.zip)
+[Download titan_octave.zip](https://github.com/nearestneighbour/TITAN/blob/master/Releases/titan_octave.zip?raw=true)
 
 Or download entire repository with:
 ```shell
@@ -28,7 +28,7 @@ Type `help <function>` to see detailed information about a function.
 [yeast_data.mat](yeast_data.mat) contains the gene expression data from Ziemann et al., and the co-expression network data from YeastNet v3. See Table 1 from Bergmans and Celikel for more details on the network data.
 
 ## References
-Bergmans and Celikel. 2021. “TITAN: A Toolbox for Information-Theoretic Analysis of Molecular Networks.“
+Bergmans and Celikel. 2021. “TITAN: A Toolbox for Information-Theoretic Analysis of Molecular Networks.“ *(in preparation)*
 
 Kim, Hanhae, Junha Shin, Eiru Kim, Hyojin Kim, Sohyun Hwang, Jung Eun Shim, and Insuk Lee. 2014. “YeastNet v3: A Public Database of Data-Specific and Integrated Functional Gene Networks for Saccharomyces Cerevisiae.” Nucleic Acids Research 42 (D1): D731–36. https://doi.org/10.1093/nar/gkt981.
 
