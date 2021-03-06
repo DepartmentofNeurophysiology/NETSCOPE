@@ -20,7 +20,7 @@ function [px,ex] = matrix_distribution(varargin)
 % px:       data distribution - array of bin counts
 % ex:       bin edges
 
-%% Parse arguments
+% Parse arguments
 options = struct();
 for i = 1:2:length(varargin)
     options.(varargin{i}) = varargin{i+1};
@@ -41,7 +41,7 @@ if ~isfield(options,'bins')
     options.bins = 1000;
 end
     
-%% Count data
+% Count data
 ex = linspace(0,1,options.bins+1);
 px = zeros(1,options.bins);
 

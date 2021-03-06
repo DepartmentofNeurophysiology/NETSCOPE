@@ -63,7 +63,3 @@ end
 
 %% Normalize and symmetrize MI matrix
 mi = normalize_MI(mi+mi',h);
-% Old normalization
-%mi = mi ./ repmat(h,1,ngenes);
-%mi(isnan(mi)) = 0;
-%mi = (mi+mi')/2;

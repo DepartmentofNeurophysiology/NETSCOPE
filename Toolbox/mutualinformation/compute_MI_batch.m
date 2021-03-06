@@ -102,13 +102,6 @@ for i = 1:length(lp)
         if i ~= j % Not along diagonal
             outfile.mi(jx,ix) = mi';
         end
-        % Old normalization
-        %mi1 = mi ./ repmat(h(ix),1,length(jx));
-        %mi1(isnan(mi1)) = 0;
-        %mi2 = mi' ./ repmat(h(jx),1,length(ix));
-        %mi2(isnan(mi2)) = 0;
-        %outfile.mi(ix,jx) = (mi1+mi2')/2;
-        %outfile.mi(jx,ix) = (mi1'+mi2)/2;
         fprintf('%s: Saved batch %d out of %d\n',datestr(datetime('now')),k,nbatches);
     end
 end

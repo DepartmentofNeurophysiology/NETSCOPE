@@ -23,9 +23,6 @@ options = struct();
 for i = 1:2:length(varargin)
     options.(varargin{i}) = varargin{i+1};
 end
-%if ~isfield(options,'method')
-%    options.method = 'separate';
-%end
 if isfield(options,'log')
     if options.log
         gem = log(gem + 1);
@@ -36,15 +33,6 @@ end
 
 ngenes = size(gem,1);
 nbins = ceil(1+log2(size(gem,2)));
-%{
-Old way of choosing bins
-if strcmp(options.method,'uniform')
-    [~,ex] = histcounts(gem(:),nbins);
-    ex = repmat(ex,ngenes,1);
-elseif strcmp(options.method,'separate')
-    ex = zeros(ngenes,nbins+1);
-end
-%}
 px = zeros(ngenes,nbins);
 ex = zeros(ngenes,nbins+1);
 for i = 1:ngenes
@@ -53,14 +41,6 @@ for i = 1:ngenes
     end
     ex(i,:) = linspace(min(gem(i,:)),max(gem(i,:)),nbins+1);
     px(i,:) = histcounts(gem(i,:),ex(i,:));
-    %{
-    Old way of binning
-    if sum(ex(i,:)) == 0
-        [px(i,:),ex(i,:)] = histcounts(gem(i,:),nbins);
-    else
-        px(i,:) = histcounts(gem(i,:),ex(i,:));
-    end
-    %}
 end
 
 % Normalize distributions

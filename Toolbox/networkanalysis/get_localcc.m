@@ -22,4 +22,4 @@ for i = 1:n
     nbh = mi(nb,nb); % Neighborhood map
     lcc(i) = sum(sum(nbh)) / (nhs*(nhs-1));
 end
-%lcc(isnan(lcc)) = 0; % If a node has no neighbours, LCC is undefined
+lcc(isnan(lcc)) = 0; % If a node has no neighbours, LCC is undefined

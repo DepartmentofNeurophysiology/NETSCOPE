@@ -43,21 +43,17 @@ for k = 1:K-1
 
         [spurCost,spurPath] = shortestpath(mi1,spurNode,target);
         spurPath = spurPath{1};
-%        if spurCost ~= Inf % Error check
-            totalPath = [rootPath spurPath(2:end)];
-            totalCost = rootCost+spurCost;
-            B = [B {totalPath}];
-            Bc = [Bc totalCost];
-            for j = 1:length(B)-1 % Discard path if duplicate
-                if isequal(B{j},totalPath)
-                    B = B(1:end-1);
-                    Bc = Bc(1:end-1);
-                    break;
-                end
+        totalPath = [rootPath spurPath(2:end)];
+        totalCost = rootCost+spurCost;
+        B = [B {totalPath}];
+        Bc = [Bc totalCost];
+        for j = 1:length(B)-1 % Discard path if duplicate
+            if isequal(B{j},totalPath)
+                B = B(1:end-1);
+                Bc = Bc(1:end-1);
+                break;
             end
-%        else
-%            disp('inf');
-%        end
+        end
     end
 
     [~,ksp] = min(Bc);
