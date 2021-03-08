@@ -25,6 +25,8 @@ noisefactor = [.1 .3 .5];
 % The resulting (fpr,tpr) matrices correspond to the data points from
 % Figure 3A (with some variance).
 
+
+startup;
 fpr = zeros(length(nsamples), length(noisefactor));
 tpr = zeros(length(nsamples), length(noisefactor));
 
