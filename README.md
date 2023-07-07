@@ -1,5 +1,5 @@
 ## Introduction
-TITAN is a MATLAB/Octave toolbox for information theoretical analysis of molecular networks. It can be used for e.g. network analysis of gene expression data, using topological patterns to identify genes or pathways of interest. The toolbox is plug-and-play, download the code and start importing your data. For more information, see the accompanying article (Bergmans and Celikel 2021).
+NETSCOPE is a MATLAB/Octave toolbox for information theoretical analysis of molecular networks. It can be used for e.g. network analysis of gene expression data, using topological patterns to identify genes or pathways of interest. The toolbox is plug-and-play, download the code and start importing your data. For more information, see the accompanying article (Bergmans and Celikel 2021).
 
 ## Download and Setup
 **MATLAB**  
