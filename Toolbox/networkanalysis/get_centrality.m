@@ -4,7 +4,7 @@ function ct = get_centrality(mi,paths)
 % determine how important the role of a node is in the global network
 % structure.
 % 
-% ct = get_centrality(mi,paths)
+% ct = get_centrality(mi, paths)
 % 
 % Input:
 % mi:       MI/network matrix

@@ -1,5 +1,5 @@
 function h = get_entropy(px)
-%% Compute entropy from gene transcription distributions
+%% Compute entropy from data distributions
 % 
 % h = get_entropy(px)
 % 
@@ -7,12 +7,12 @@ function h = get_entropy(px)
 % px: distributions matrix from get_distributions()
 % 
 % Output:
-% h: array with the entropy of each gene
+% h: array with the entropy of each variable
 % 
 % See also GET_DISTRIBUTIONS
 
-ngenes = size(px,1);
-h = zeros(ngenes,1);
-for i = 1:ngenes
+nvars = size(px,1);
+h = zeros(nvars,1);
+for i = 1:nvars
     h(i) = -nansum(px(i,:) .* log(px(i,:)));
 end

@@ -1,11 +1,11 @@
-function [px,ex] = matrix_distribution(varargin)
+function [px, ex] = matrix_distribution(varargin)
 %% Get distribution of data in a matrix
 % For large matrix that can't be loaded completely because of memory
 % limitations, the MAT file containing the matrix can be specified, so that
 % it can be loaded and processed in batches. This function assumes the
 % data is confined to the interval [0,1].
 % 
-% [px,ex] = matrix_distribution(...)
+% [px, ex] = matrix_distribution(...)
 % 
 % Input: the following Name-Value argument pairs:
 % file:     (optional) MAT file containing a matrix. Required if mat 

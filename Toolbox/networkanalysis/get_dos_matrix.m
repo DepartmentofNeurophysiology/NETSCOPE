@@ -7,7 +7,7 @@ function dos = get_dos_matrix(mi)
 % for all pairs of nodes and stores them in a matrix same sized to the
 % input matrix.
 % 
-% dos = get_dos(mi,source,target)
+% dos = get_dos(mi)
 %
 % Input:
 % mi:       MI/network matrix

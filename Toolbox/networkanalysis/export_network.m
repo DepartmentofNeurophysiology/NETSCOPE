@@ -3,11 +3,11 @@ function export_network(filename,labels,mi,directed,varargin)
 % Export a network to a GEXF (XML-like) file that can be loaded by network
 % visualization software, Gephi in particular.
 % 
-% export_network(filename,labels,mi,directed,...)
+% export_network(filename, labels, mi, directed, ...)
 % 
 % Input:
 % filename: (required) name of output file.
-% labels:   (required) N by 1 cell array with node labels.
+% labels:   (required) N by 1 array with node labels.
 % mi:       (required) MI/network matrix (N by N).
 % directed: (required) true/false whether edge directionality should be
 %           considered.
@@ -21,8 +21,8 @@ function export_network(filename,labels,mi,directed,varargin)
 % not be named 'id', 'source', 'target' or 'weight'.
 % 
 % Example (where Nodecolor, Edgecolor and Edgetype are optional data):
-% exportNetwork('nw.gexf',labels,[N*N array],false,'Nodecolor',[N*1 array], ...
-%               'Edgecolor',[N*N array],'Edgetype',[N*N array])
+% exportNetwork('nw.gexf', labels, [N*N array], false, 'Nodecolor', ...
+%           [N*1 array], 'Edgecolor', [N*N array], 'Edgetype', [N*N array])
 
 %% Parse arguments
 n = length(labels); % Number of nodes

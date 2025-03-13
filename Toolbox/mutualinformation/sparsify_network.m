@@ -1,4 +1,4 @@
-function [sps,gcc] = sparsify_network(mi)
+function [sps, gcc] = sparsify_network(mi)
 %% Remove indirect links from the network using network sparsification
 % This function removes links from that network that are the result of
 % indirect correlations. This is done by network sparsification based on
@@ -6,7 +6,7 @@ function [sps,gcc] = sparsify_network(mi)
 % in the network and removes the weakest links. This can also be used to
 % calculate the network Global Clustering Coefficient.
 % 
-% [sps,gcc] = sparsify_network(mat)
+% [sps, gcc] = sparsify_network(mi)
 % 
 % Input:
 % mi:   network matrix

@@ -1,5 +1,5 @@
 function fetch_results
-%% This function is called from compute_MI_PP()
+%% This internal function is called from compute_MI_PP()
 % This function can be interrupted and then called again, as long as the
 % Parallel Pool is still intact. If not, call compute_MI_large() with
 % PP=true and Cont=true to finish computation.

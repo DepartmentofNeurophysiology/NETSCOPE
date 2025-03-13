@@ -1,13 +1,13 @@
-function [d,p] = shortestpath(mi,source,target)
+function [d,p] = shortestpath(mi, source, target)
 %% Calculate the shortest path in a graph using Dijkstra's algorithm.
 % This function calculates the shortest path from a node i to node j (or
 % all other nodes) in the network. The length of a path is defined by the
 % sum of the distances between the nodes along the path. The shortest path
 % (i,j) is the path from i to j for which this path length is minimal. The
 % distance between nodes is equal to the ratio of Variation of Information
-% (VOI, equals 1-MI) to Mutual Information (MI).
+% (VI, equals 1-MI) to Mutual Information (MI).
 % 
-% [d,p] = shortestpath(mi,source,target)
+% [d,p] = shortestpath(mi, source, target)
 % 
 % Input:
 % mi:       MI/network matrix

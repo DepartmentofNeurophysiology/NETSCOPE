@@ -1,8 +1,8 @@
-function [d,A] = kshortestpaths(mi,K,source,target)
+function [d,A] = kshortestpaths(mi, K, source, target)
 %% Calculate K shortest paths (KSPs) in a graph using Yen's algorithm.
 % See shortestpath function for details on shortest paths.
 % 
-% [d,A] = kshortestpaths(mi,K,source,target)
+% [d,A] = kshortestpaths(mi, K, source, target)
 % 
 % Input:
 % mi:       MI/network matrix
@@ -16,7 +16,6 @@ function [d,A] = kshortestpaths(mi,K,source,target)
 % 
 % See also SHORTESTPATH
 
-dist = (1 - mi) ./ mi;
 A = cell(K,1);
 [~,A(1,:)] = shortestpath(mi,source,target); % First KSP using Dijkstra
 
