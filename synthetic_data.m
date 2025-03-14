@@ -57,7 +57,7 @@ for s = 1:length(nsamples) % Iterate over nsamples
             gem = [gem ; gem(end+1-ND:end,:) .* (1 + randn(ND,nsamples(s)) * noisefactor(n))];
         end
 
-        %% Reconstruct network using TITAN
+        %% Reconstruct network using NETSCOPE
         fprintf("Computing MI matrix\n");
         mi = compute_MI(gem);
         % Store MI matrices of 8000-sample networks for generating figures later on
@@ -67,7 +67,7 @@ for s = 1:length(nsamples) % Iterate over nsamples
 
         %% Calculate cutoff point with shuffle correction (repeat n times for better results)
         fprintf("Computing MI matrix for shuffle correction\n");
-        shuffled_gem = shuffle_GEM(gem);
+        shuffled_gem = shuffle_data(gem);
         shuffled_mi = compute_MI(shuffled_gem);
         threshold = median(shuffled_mi(:)) + 3 * std(shuffled_mi(:));
 

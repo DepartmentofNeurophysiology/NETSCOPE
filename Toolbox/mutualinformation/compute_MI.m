@@ -35,7 +35,7 @@ if isfield(options,'px')
     px = options.px;
     ex = options.ex;
 else
-    [px,ex] = get_distributions(data);
+    [px, ex] = get_distributions(data);
 end
 if isfield(options,'h')
     h = options.h;
@@ -44,7 +44,7 @@ else
 end
 
 %% Compute MI matrix
-nvars = size(px,1);
+nvars = size(px, 1);
 mi = zeros(nvars);
 for i = 1:nvars
     if sum(data(i,:)) == 0
@@ -55,11 +55,11 @@ for i = 1:nvars
             continue;
         end
         % Compute joint distribution and MI
-        pxy = histcounts2(data(i,:),data(j,:),ex(i,:),ex(j,:));
+        pxy = histcounts2(data(i,:), data(j,:), ex{i}, ex{j});
         pxy = pxy / sum(pxy(:));
-        mi(i,j) = sum(nansum(pxy .* log(pxy ./ (px(i,:)'*px(j,:)))));
+        mi(i,j) = sum(nansum(pxy .* log(pxy ./ (px{i}'*px{j}))));
     end
 end
 
 %% Normalize and symmetrize MI matrix
-mi = normalize_MI(mi+mi',h);
+mi = normalize_MI(mi+mi', h);

@@ -11,8 +11,8 @@ function h = get_entropy(px)
 % 
 % See also GET_DISTRIBUTIONS
 
-nvars = size(px,1);
-h = zeros(nvars,1);
+nvars = size(px, 1);
+h = zeros(nvars, 1);
 for i = 1:nvars
-    h(i) = -nansum(px(i,:) .* log(px(i,:)));
+    h(i) = -nansum(px{i} .* log(px{i}));
 end
