@@ -15,7 +15,7 @@ git clone https://github.com/DepartmentofNeurophysiology/NETSCOPE.git
 To add the toolbox files to the search path and enable all functionality, navigate in MATLAB/Octave to the TITAN directory and run the `startup` command.
 
 ## Documentation
-![Workflow](https://github.com/DepartmentofNeurophysiology/NETSCOPE/assets/99247856/2e850213-29c2-4169-85d0-28508dc57da8)
+![Workflow](https://github.com/DepartmentofNeurophysiology/NETSCOPE/blob/master/Documentation/workflow.png)
 
 
 Type `help <function>` to see detailed information about a function.
