@@ -1,8 +1,9 @@
 function [px, ex] = get_distributions(data, varargin)
 %% Compute probability distributions of gene expression data
 % Compute the data distributions per variable across samples, by binning
-% and counting the levels. Bins are determined by Freedman-Diaconis rule.
-% The distributions are later used in the entropy- and MI-computations.
+% and counting the levels. Bins are determined by either by Sturges', or
+% the Freedman-Diaconis rule. The distributions are later used in the
+% entropy- and MI-computations.
 % 
 % [px, ex] = get_distributions(data)
 % 
@@ -10,6 +11,7 @@ function [px, ex] = get_distributions(data, varargin)
 % data: data matrix (rows are variables, columns are samples)
 
 % Optionally, the following Name-Value argument pair:
+% binning:  which binning rule to use, default is Freedman-Diaconis
 % log:      whether to log-transform the data before binning, default is
 %           false.
 % 
@@ -30,6 +32,9 @@ if isfield(options, 'log')
 else
     options.log = false;
 end
+if ~isfield(options, 'binning')
+    options.binning = 'freedman';
+end
 
 nvars = size(data, 1);
 bin_factor = nthroot(size(data, 2), 3);
@@ -40,22 +45,28 @@ for i = 1:nvars
         continue;
     end
     
-    % Freedman-Diaconis rule to calculate bin width
-    iqr_value = iqr(data(i, :));
-    bin_width = 2 * iqr_value / bin_factor;
+    if contains(lower(options.binning), 'freedman')
+        % Freedman-Diaconis rule to calculate bin width
+        iqr_value = iqr(data(i, :));
+        bin_width = 2 * iqr_value / bin_factor;
 
-    % Handle edge cases
-    if bin_width <= 0
-        bin_width = range(data(i, :)) / 10;
-    end
-    if bin_width <= 0
-        bin_width = 2;
-    end
+        % Handle edge cases
+        if bin_width <= 0
+            bin_width = range(data(i, :)) / 10;
+        end
+        if bin_width <= 0
+            bin_width = 2;
+        end
     
-    % Create bin edges
-    min_edge = min(data(i, :));
-    max_edge = max(data(i, :));
-    ex{i} = min_edge:bin_width:max_edge;
+        % Create bin edges
+        min_edge = min(data(i, :));
+        max_edge = max(data(i, :));
+        ex{i} = min_edge:bin_width:max_edge;
+    else
+        % Sturges' rule for bin width and number
+        nbins = ceil(1 + log2(size(data, 2)));
+        ex{i} = linspace(min(data(i, :)), max(data(i, :)), nbins + 1);
+    end
     
     % Calculate distributions
     px{i} = histcounts(data(i, :), ex{i});
