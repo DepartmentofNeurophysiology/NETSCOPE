@@ -23,8 +23,9 @@ function [d,p] = shortestpath(mi, source, target)
 % 
 % See also GET_PATHLENGTH, KSHORTESTPATHS, GET_DOS_MATRIX
 
-dist = (1-mi) ./ mi;
-n = size(dist,1);
+mi(mi>1) = 1;
+vi = (1-mi) ./ mi;
+n = size(vi,1);
 
 d = inf(1,n); % distance between source and targets
 d(source) = 0;
@@ -57,7 +58,7 @@ while sum(q)>0
     
     % For every target: if the new path (via u) is shorter than the old
     % one, replace.
-    tdist = d(u) + dist(u,:); % temporary distance
+    tdist = d(u) + vi(u,:); % temporary distance
     index = tdist<d; % This is not equal to index=L(u,:)>0, because of inf values
     d(index) = tdist(index);
     prev(index) = u;
