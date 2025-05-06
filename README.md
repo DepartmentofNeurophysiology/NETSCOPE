@@ -2,17 +2,12 @@
 NETSCOPE is a MATLAB/Octave toolbox for information theoretical analysis of molecular networks. It can be used for network construction and analysis from a wide variety of biological data. Applications range from constructing gene co-expression networks and using topological patterns to identify genes or pathways of interest, to identifying functional links in fMRI- and EEG-based networks. The toolbox is plug-and-play, download the code and start importing your data. For more information, see the accompanying article (Bergmans, Jamal and Celikel 2025).
 
 ## Download and Setup
-**MATLAB**  
-[Download netscope_matlab.zip](https://github.com/DepartmentofNeurophysiology/TITAN/blob/master/Releases/netscope_matlab.zip?raw=true)
-
-**Octave**  
-[Download netscope_octave.zip](https://github.com/DepartmentofNeurophysiology/TITAN/blob/master/Releases/netscope_octave.zip?raw=true)
-ownload entire repository with:
+Download repository with:
 ```shell
 git clone https://github.com/DepartmentofNeurophysiology/NETSCOPE.git
 ```
 
-To add the toolbox files to the search path and enable all functionality, navigate in MATLAB/Octave to the TITAN directory and run the `startup` command.
+To add the toolbox files to the search path and enable all functionality, navigate in MATLAB/Octave to the NETSCOPE directory and run the `startup` command.
 
 ## Documentation
 ![Workflow](https://github.com/DepartmentofNeurophysiology/NETSCOPE/blob/master/Documentation/workflow.png)
